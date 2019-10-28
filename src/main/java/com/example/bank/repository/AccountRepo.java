@@ -12,4 +12,7 @@ public interface AccountRepo extends JpaRepository<Account, String > {
 
     @Query("SELECT a FROM Account a WHERE a.userId = :userId")
     public List<Account> getAccountByUserId(@Param("userId") String userId);
+
+    @Query("SELECT a FROM Account a WHERE a.accountId = :accountId")
+    public Account getAccountByAccountId(@Param("accountId") String accountId);
 }

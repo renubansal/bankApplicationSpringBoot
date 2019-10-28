@@ -16,6 +16,8 @@ public class Account {
 
     private String userId;
 
+    private float amount;
+
     public String getAccountId() {
         return accountId;
     }
@@ -26,6 +28,14 @@ public class Account {
 
     public String getUserId() {
         return userId;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
 }
 

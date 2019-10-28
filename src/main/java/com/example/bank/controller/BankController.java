@@ -31,7 +31,7 @@ public class BankController {
     @GetMapping(path = "/users/{userName}")
     public ResponseEntity<Object> getUser(@PathVariable(name = "userName") String userName) {
 
-        System.out.println("userName................."+userName);
+        System.out.println("userName................." + userName);
         User user = bankService.getUser(userName);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -62,4 +62,14 @@ public class BankController {
         return new ResponseEntity<>(accountAdded, HttpStatus.OK);
     }
 
+    @PatchMapping(path = "accounts/{fromAccountId}/transfer/{toAccountId}/{amountWithdraw}")
+    public ResponseEntity<Object> transferMoney(@PathVariable(name = "fromAccountId") String fromAccountId,
+                                                @PathVariable(name = "toAccountId") String toAccountId,
+                                                @PathVariable(name = "amountWithdraw") float amountWithdraw) {
+        User user = bankService.transferMoney(fromAccountId, toAccountId, amountWithdraw);
+        if (user.equals(null)) {
+            return new ResponseEntity<>(user, HttpStatus.PROCESSING);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 }
