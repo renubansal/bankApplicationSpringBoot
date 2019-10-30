@@ -60,15 +60,15 @@ public class BankService {
         Account fromAccount = this.accountRepo.getAccountByAccountId(fromAccountId);
         Account toAccount = this.accountRepo.getAccountByAccountId(toAccountId);
 
-        float remainingAmountInFromAccount = fromAccount.getAmount() - toAccount.getAmount();
-        if (remainingAmountInFromAccount <= amountWithdraw) {
+        float remainingAmountInFromAccount = fromAccount.getAmount() - amountWithdraw;
+        if (remainingAmountInFromAccount <= 0) {
             return null;
         }
 
         User fromAccountUser = this.userRepo.getUserByUserName(fromAccount.getUserId());
 
         fromAccount.setAmount(remainingAmountInFromAccount);
-        toAccount.setAmount(amountWithdraw);
+        toAccount.setAmount(toAccount.getAmount() + amountWithdraw);
 
         this.accountRepo.save(fromAccount);
         this.accountRepo.save(toAccount);
