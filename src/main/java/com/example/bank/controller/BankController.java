@@ -31,7 +31,6 @@ public class BankController {
     @GetMapping(path = "/users/{userName}")
     public ResponseEntity<Object> getUser(@PathVariable(name = "userName") String userName) {
 
-        System.out.println("userName................." + userName);
         User user = bankService.getUser(userName);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -40,10 +39,10 @@ public class BankController {
     public ResponseEntity<Object> addUser(@RequestBody User user) {
 
         User userAdded = bankService.addUser(user);
-        if (userAdded.getUserId().equals(null)) {
-            return new ResponseEntity<>(user, HttpStatus.PROCESSING);
+        if (userAdded.getUserId() == null) {
+            return new ResponseEntity<>(userAdded, HttpStatus.PROCESSING);
         }
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(userAdded, HttpStatus.OK);
     }
 
     @GetMapping(path = "/accounts")
@@ -56,7 +55,7 @@ public class BankController {
     public ResponseEntity<Object> addAccount(@RequestBody Account account) {
 
         Account accountAdded = bankService.addAccount(account);
-        if (accountAdded.getAccountId().equals(null)) {
+        if (accountAdded.getAccountId() == null) {
             return new ResponseEntity<>(accountAdded, HttpStatus.PROCESSING);
         }
         return new ResponseEntity<>(accountAdded, HttpStatus.OK);
@@ -67,7 +66,7 @@ public class BankController {
                                                 @PathVariable(name = "toAccountId") String toAccountId,
                                                 @PathVariable(name = "amountWithdraw") float amountWithdraw) {
         User user = bankService.transferMoney(fromAccountId, toAccountId, amountWithdraw);
-        if (user.equals(null)) {
+        if (user == null) {
             return new ResponseEntity<>(user, HttpStatus.PROCESSING);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);

@@ -1,5 +1,6 @@
 package com.example.bank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,8 +20,24 @@ public class User {
     @Embedded
     private List<Account> accounts;
 
+    public User() {
+    }
+
+    public User(String userName, List<Account> accounts) {
+        this.userName = userName;
+        this.accounts = accounts;
+    }
+
     public String getUserId() {
         return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserName() {

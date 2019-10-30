@@ -6,19 +6,25 @@ import com.example.bank.repository.AccountRepo;
 import com.example.bank.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 public class BankService {
-    @Autowired
     UserRepo userRepo;
 
-    @Autowired
     AccountRepo accountRepo;
 
+    @Autowired
+    public BankService(UserRepo userRepo, AccountRepo accountRepo) {
+        this.userRepo = userRepo;
+        this.accountRepo = accountRepo;
+    }
+
     public User getUser(String userName) {
+        System.out.println("user repo......" + this.userRepo);
         User user = this.userRepo.getUserByUserName(userName);
 
         setAccountsOf(user);

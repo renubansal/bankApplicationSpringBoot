@@ -12,6 +12,9 @@ public class Account {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String accountId;
 
+    public Account() {
+    }
+
     private String accountType;
 
     private String userId;
@@ -36,6 +39,10 @@ public class Account {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 }
 
